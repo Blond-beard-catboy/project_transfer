@@ -4,7 +4,8 @@ from functools import lru_cache
 class Settings(BaseSettings):
     # Название сервиса (переопределить в каждом сервисе)
     SERVICE_NAME: str = "template"
-    
+    CARGO_SERVICE_URL: str = "http://localhost:8001"  # значение по умолчанию
+
     # База данных
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD: str = "postgres"

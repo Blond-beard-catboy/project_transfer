@@ -3,14 +3,14 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     # Название сервиса (переопределить в каждом сервисе)
-    SERVICE_NAME: str = "template"
+    SERVICE_NAME: str = "cargo_service"
     
     # База данных
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD: str = "postgres"
     POSTGRES_HOST: str = "localhost"
     POSTGRES_PORT: int = 5432
-    POSTGRES_DB: str = "template_db"
+    POSTGRES_DB: str = "cargo_db"
     
     @property
     def DATABASE_URL(self) -> str:
