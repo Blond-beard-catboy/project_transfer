@@ -10,9 +10,8 @@ setup_logging()
 settings = get_settings()
 
 app = FastAPI(title=settings.SERVICE_NAME)
-
-app.add_middleware(CorrelationIDMiddleware)
 app.include_router(auth.router, prefix="/api/users")
+app.add_middleware(CorrelationIDMiddleware)
 
 @app.on_event("startup")
 async def startup():
@@ -23,5 +22,3 @@ async def startup():
 @app.on_event("shutdown")
 async def shutdown():
     await engine.dispose()
-
-app.include_router(router, prefix="/api")

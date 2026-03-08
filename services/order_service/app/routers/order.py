@@ -51,11 +51,12 @@ async def create_order(
     await db.commit()
     await db.refresh(db_order)
 
-    # 4. Отправить уведомление о создании заказа
+    # 4. Отправить уведомление о создании заказа (добавлены заголовки)
     await send_notification(
         user_id=order.customer_id,
         subject="Заказ создан",
-        body=f"Ваш заказ №{db_order.id} успешно создан."
+        body=f"Ваш заказ №{db_order.id} успешно создан.",
+        headers={"X-User-ID": str(current_user["id"]), "X-User-Role": current_user["role"]}  # <-- добавлено
     )
 
     return db_order
@@ -111,7 +112,6 @@ async def update_order_status(
 
     # Если статус меняется на confirmed, генерируем PDF
     if new_status == OrderStatus.confirmed and old_status != OrderStatus.confirmed:
-        # Получаем данные груза (нужны для договора)
         try:
             cargo = await get_cargo(
                 order.cargo_id,
@@ -120,18 +120,18 @@ async def update_order_status(
         except Exception as e:
             raise HTTPException(status_code=503, detail=f"Cargo service unavailable: {str(e)}")
 
-        # Генерируем PDF
         filename = generate_contract(order.id, cargo, customer_name=f"User {order.customer_id}")
         order.contract_file = filename
 
     await db.commit()
     await db.refresh(order)
 
-    # Отправляем уведомление об изменении статуса
+    # Отправляем уведомление об изменении статуса (добавлены заголовки)
     await send_notification(
         user_id=order.customer_id,
         subject="Статус заказа изменён",
-        body=f"Статус заказа №{order.id} изменён на {order.status.value}."
+        body=f"Статус заказа №{order.id} изменён на {order.status.value}.",
+        headers={"X-User-ID": str(current_user["id"]), "X-User-Role": current_user["role"]}  # <-- добавлено
     )
 
     return order
@@ -152,7 +152,6 @@ async def confirm_order(
     if order.status != OrderStatus.new:
         raise HTTPException(status_code=400, detail="Only new orders can be confirmed")
 
-    # Получаем данные груза
     try:
         cargo = await get_cargo(
             order.cargo_id,
@@ -161,7 +160,6 @@ async def confirm_order(
     except Exception as e:
         raise HTTPException(status_code=503, detail=f"Cargo service unavailable: {str(e)}")
 
-    # Генерируем PDF
     filename = generate_contract(order.id, cargo, customer_name=f"User {order.customer_id}")
     order.contract_file = filename
     order.status = OrderStatus.confirmed
@@ -169,11 +167,12 @@ async def confirm_order(
     await db.commit()
     await db.refresh(order)
 
-    # Уведомление
+    # Уведомление о подтверждении (добавлены заголовки)
     await send_notification(
         user_id=order.customer_id,
         subject="Заказ подтверждён",
-        body=f"Заказ №{order.id} подтверждён. Договор доступен."
+        body=f"Заказ №{order.id} подтверждён. Договор доступен.",
+        headers={"X-User-ID": str(current_user["id"]), "X-User-Role": current_user["role"]}  # <-- добавлено
     )
 
     return order

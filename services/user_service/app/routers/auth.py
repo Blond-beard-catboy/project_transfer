@@ -1,17 +1,16 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.core.database import get_db
 from app.schemas.user import UserCreate, UserLogin, UserOut
 from app.models.user import User
-from passlib.context import CryptContext
+from app.dependencies import get_current_user
+import bcrypt
 import jwt
 from app.core.config import get_settings
 from datetime import datetime, timedelta
-from app.dependencies import get_current_user
 
-router = APIRouter(prefix="/auth", tags=["auth"])
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+router = APIRouter(tags=["auth"])
 settings = get_settings()
 
 def create_access_token(data: dict):
@@ -27,7 +26,10 @@ async def register(user: UserCreate, db: AsyncSession = Depends(get_db)):
     if result.scalar_one_or_none():
         raise HTTPException(status_code=400, detail="Email already registered")
     
-    hashed = pwd_context.hash(user.password)
+    # Хешируем пароль с помощью bcrypt
+    password_bytes = user.password.encode('utf-8')
+    hashed = bcrypt.hashpw(password_bytes, bcrypt.gensalt()).decode('utf-8')
+    
     db_user = User(
         email=user.email,
         hashed_password=hashed,
@@ -43,7 +45,13 @@ async def register(user: UserCreate, db: AsyncSession = Depends(get_db)):
 async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(User).where(User.email == user_data.email))
     user = result.scalar_one_or_none()
-    if not user or not pwd_context.verify(user_data.password, user.hashed_password):
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    
+    # Проверяем пароль с помощью bcrypt
+    password_bytes = user_data.password.encode('utf-8')
+    stored_hash = user.hashed_password.encode('utf-8')
+    if not bcrypt.checkpw(password_bytes, stored_hash):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
     token = create_access_token({"sub": str(user.id), "role": user.role.value})

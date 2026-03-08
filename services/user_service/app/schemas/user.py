@@ -1,6 +1,7 @@
 from pydantic import BaseModel, EmailStr
 from enum import Enum
 from datetime import datetime
+from typing import Optional
 
 class UserRole(str, Enum):
     driver = "driver"

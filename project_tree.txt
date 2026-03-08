@@ -10,8 +10,45 @@ project_transfer
 ├── scripts
 │   └── create-multiple-dbs.sh
 ├── services
+│   ├── api_gateway
+│   │   ├── app
+│   │   │   ├── core
+│   │   │   │   ├── config.py
+│   │   │   │   ├── database.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── logging.py
+│   │   │   │   ├── middleware.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── config.cpython-312.pyc
+│   │   │   │       ├── __init__.cpython-312.pyc
+│   │   │   │       ├── logging.cpython-312.pyc
+│   │   │   │       └── middleware.cpython-312.pyc
+│   │   │   ├── dependencies.py
+│   │   │   ├── __init__.py
+│   │   │   ├── main.py
+│   │   │   ├── middleware
+│   │   │   │   ├── auth.py
+│   │   │   │   └── __pycache__
+│   │   │   │       └── auth.cpython-312.pyc
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   └── main.cpython-312.pyc
+│   │   │   ├── routers
+│   │   │   │   └── __init__.py
+│   │   │   └── utils
+│   │   │       ├── __init__.py
+│   │   │       ├── proxy.py
+│   │   │       └── __pycache__
+│   │   │           ├── __init__.cpython-312.pyc
+│   │   │           └── proxy.cpython-312.pyc
+│   │   ├── Dockerfile
+│   │   ├── requirements.txt
+│   │   └── tests
+│   │       └── __init__.py
 │   ├── cargo_service
 │   │   ├── app
+│   │   │   ├── clients
+│   │   │   │   └── cargo_client.py
 │   │   │   ├── core
 │   │   │   │   ├── config.py
 │   │   │   │   ├── database.py
@@ -57,23 +94,47 @@ project_transfer
 │   │   ├── test_cargos.json
 │   │   └── tests
 │   │       └── __init__.py
-│   ├── notify_service
+│   ├── notification_service
 │   │   ├── app
+│   │   │   ├── clients
+│   │   │   │   └── notify_client.py
 │   │   │   ├── core
 │   │   │   │   ├── config.py
 │   │   │   │   ├── database.py
 │   │   │   │   ├── __init__.py
 │   │   │   │   ├── logging.py
-│   │   │   │   └── middleware.py
+│   │   │   │   ├── middleware.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── config.cpython-312.pyc
+│   │   │   │       ├── database.cpython-312.pyc
+│   │   │   │       ├── __init__.cpython-312.pyc
+│   │   │   │       ├── logging.cpython-312.pyc
+│   │   │   │       └── middleware.cpython-312.pyc
 │   │   │   ├── dependencies.py
 │   │   │   ├── __init__.py
 │   │   │   ├── main.py
 │   │   │   ├── models
-│   │   │   │   └── __init__.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── notification.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── __init__.cpython-312.pyc
+│   │   │   │       └── notification.cpython-312.pyc
+│   │   │   ├── __pycache__
+│   │   │   │   ├── dependencies.cpython-312.pyc
+│   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   └── main.cpython-312.pyc
 │   │   │   ├── routers
-│   │   │   │   └── __init__.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── notification.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── __init__.cpython-312.pyc
+│   │   │   │       └── notification.cpython-312.pyc
 │   │   │   ├── schemas
-│   │   │   │   └── __init__.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── notification.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── __init__.cpython-312.pyc
+│   │   │   │       └── notification.cpython-312.pyc
 │   │   │   └── utils
 │   │   │       └── __init__.py
 │   │   ├── Dockerfile
@@ -82,23 +143,63 @@ project_transfer
 │   │       └── __init__.py
 │   ├── order_service
 │   │   ├── app
+│   │   │   ├── clients
+│   │   │   │   ├── cargo_client.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── notification_client.py
+│   │   │   │   ├── __pycache__
+│   │   │   │   │   ├── cargo_client.cpython-312.pyc
+│   │   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   │   ├── notification_client.cpython-312.pyc
+│   │   │   │   │   └── route_client.cpython-312.pyc
+│   │   │   │   └── route_client.py
 │   │   │   ├── core
 │   │   │   │   ├── config.py
 │   │   │   │   ├── database.py
 │   │   │   │   ├── __init__.py
 │   │   │   │   ├── logging.py
-│   │   │   │   └── middleware.py
+│   │   │   │   ├── middleware.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── config.cpython-312.pyc
+│   │   │   │       ├── database.cpython-312.pyc
+│   │   │   │       ├── __init__.cpython-312.pyc
+│   │   │   │       ├── logging.cpython-312.pyc
+│   │   │   │       └── middleware.cpython-312.pyc
 │   │   │   ├── dependencies.py
 │   │   │   ├── __init__.py
 │   │   │   ├── main.py
 │   │   │   ├── models
-│   │   │   │   └── __init__.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── order.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── __init__.cpython-312.pyc
+│   │   │   │       └── order.cpython-312.pyc
+│   │   │   ├── __pycache__
+│   │   │   │   ├── dependencies.cpython-312.pyc
+│   │   │   │   ├── __init__.cpython-312.pyc
+│   │   │   │   └── main.cpython-312.pyc
 │   │   │   ├── routers
-│   │   │   │   └── __init__.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── order.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── __init__.cpython-312.pyc
+│   │   │   │       └── order.cpython-312.pyc
 │   │   │   ├── schemas
-│   │   │   │   └── __init__.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── order.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── __init__.cpython-312.pyc
+│   │   │   │       └── order.cpython-312.pyc
 │   │   │   └── utils
-│   │   │       └── __init__.py
+│   │   │       ├── __init__.py
+│   │   │       ├── pdf.py
+│   │   │       └── __pycache__
+│   │   │           ├── __init__.cpython-312.pyc
+│   │   │           └── pdf.cpython-312.pyc
+│   │   ├── contracts
+│   │   │   ├── order_2.pdf
+│   │   │   ├── order_5.pdf
+│   │   │   └── order_6.pdf
 │   │   ├── Dockerfile
 │   │   ├── requirements.txt
 │   │   └── tests
@@ -224,6 +325,11 @@ project_transfer
 │       └── tests
 │           ├── __init__.py
 │           └── test_auth.py
+├── tests
+│   └── e2e
+│       ├── __pycache__
+│       │   └── test_full_scenario.cpython-312-pytest-7.4.3.pyc
+│       └── test_full_scenario.py
 └── venv
     ├── bin
     │   ├── activate
@@ -233,6 +339,7 @@ project_transfer
     │   ├── dotenv
     │   ├── email_validator
     │   ├── httpx
+    │   ├── normalizer
     │   ├── pip
     │   ├── pip3
     │   ├── pip3.12
@@ -253,6 +360,7 @@ project_transfer
     ├── lib
     │   └── python3.12
     │       └── site-packages
+    │           ├── 81d243bd2c585b0f4821__mypyc.cpython-312-x86_64-linux-gnu.so
     │           ├── annotated_types
     │           │   ├── __init__.py
     │           │   ├── __pycache__
@@ -542,6 +650,46 @@ project_transfer
     │           │   │   └── __main__.cpython-312.pyc
     │           │   └── py.typed
     │           ├── certifi-2026.2.25.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── licenses
+    │           │   │   └── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── top_level.txt
+    │           │   └── WHEEL
+    │           ├── charset_normalizer
+    │           │   ├── api.py
+    │           │   ├── cd.cpython-312-x86_64-linux-gnu.so
+    │           │   ├── cd.py
+    │           │   ├── cli
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __main__.py
+    │           │   │   └── __pycache__
+    │           │   │       ├── __init__.cpython-312.pyc
+    │           │   │       └── __main__.cpython-312.pyc
+    │           │   ├── constant.py
+    │           │   ├── __init__.py
+    │           │   ├── legacy.py
+    │           │   ├── __main__.py
+    │           │   ├── md.cpython-312-x86_64-linux-gnu.so
+    │           │   ├── md.py
+    │           │   ├── models.py
+    │           │   ├── __pycache__
+    │           │   │   ├── api.cpython-312.pyc
+    │           │   │   ├── cd.cpython-312.pyc
+    │           │   │   ├── constant.cpython-312.pyc
+    │           │   │   ├── __init__.cpython-312.pyc
+    │           │   │   ├── legacy.cpython-312.pyc
+    │           │   │   ├── __main__.cpython-312.pyc
+    │           │   │   ├── md.cpython-312.pyc
+    │           │   │   ├── models.cpython-312.pyc
+    │           │   │   ├── utils.cpython-312.pyc
+    │           │   │   └── version.cpython-312.pyc
+    │           │   ├── py.typed
+    │           │   ├── utils.py
+    │           │   └── version.py
+    │           ├── charset_normalizer-3.4.5.dist-info
+    │           │   ├── entry_points.txt
     │           │   ├── INSTALLER
     │           │   ├── licenses
     │           │   │   └── LICENSE
@@ -1808,6 +1956,249 @@ project_transfer
     │           │   ├── top_level.txt
     │           │   ├── WHEEL
     │           │   └── zip-safe
+    │           ├── PIL
+    │           │   ├── _avif.cpython-312-x86_64-linux-gnu.so
+    │           │   ├── AvifImagePlugin.py
+    │           │   ├── _avif.pyi
+    │           │   ├── BdfFontFile.py
+    │           │   ├── _binary.py
+    │           │   ├── BlpImagePlugin.py
+    │           │   ├── BmpImagePlugin.py
+    │           │   ├── BufrStubImagePlugin.py
+    │           │   ├── ContainerIO.py
+    │           │   ├── CurImagePlugin.py
+    │           │   ├── DcxImagePlugin.py
+    │           │   ├── DdsImagePlugin.py
+    │           │   ├── _deprecate.py
+    │           │   ├── EpsImagePlugin.py
+    │           │   ├── ExifTags.py
+    │           │   ├── features.py
+    │           │   ├── FitsImagePlugin.py
+    │           │   ├── FliImagePlugin.py
+    │           │   ├── FontFile.py
+    │           │   ├── FpxImagePlugin.py
+    │           │   ├── FtexImagePlugin.py
+    │           │   ├── GbrImagePlugin.py
+    │           │   ├── GdImageFile.py
+    │           │   ├── GifImagePlugin.py
+    │           │   ├── GimpGradientFile.py
+    │           │   ├── GimpPaletteFile.py
+    │           │   ├── GribStubImagePlugin.py
+    │           │   ├── Hdf5StubImagePlugin.py
+    │           │   ├── IcnsImagePlugin.py
+    │           │   ├── IcoImagePlugin.py
+    │           │   ├── ImageChops.py
+    │           │   ├── ImageCms.py
+    │           │   ├── ImageColor.py
+    │           │   ├── ImageDraw2.py
+    │           │   ├── ImageDraw.py
+    │           │   ├── ImageEnhance.py
+    │           │   ├── ImageFile.py
+    │           │   ├── ImageFilter.py
+    │           │   ├── ImageFont.py
+    │           │   ├── ImageGrab.py
+    │           │   ├── ImageMath.py
+    │           │   ├── ImageMode.py
+    │           │   ├── ImageMorph.py
+    │           │   ├── ImageOps.py
+    │           │   ├── ImagePalette.py
+    │           │   ├── ImagePath.py
+    │           │   ├── Image.py
+    │           │   ├── ImageQt.py
+    │           │   ├── ImageSequence.py
+    │           │   ├── ImageShow.py
+    │           │   ├── ImageStat.py
+    │           │   ├── ImageText.py
+    │           │   ├── ImageTk.py
+    │           │   ├── ImageTransform.py
+    │           │   ├── ImageWin.py
+    │           │   ├── _imagingcms.cpython-312-x86_64-linux-gnu.so
+    │           │   ├── _imagingcms.pyi
+    │           │   ├── _imaging.cpython-312-x86_64-linux-gnu.so
+    │           │   ├── _imagingft.cpython-312-x86_64-linux-gnu.so
+    │           │   ├── _imagingft.pyi
+    │           │   ├── _imagingmath.cpython-312-x86_64-linux-gnu.so
+    │           │   ├── _imagingmath.pyi
+    │           │   ├── _imagingmorph.cpython-312-x86_64-linux-gnu.so
+    │           │   ├── _imagingmorph.pyi
+    │           │   ├── _imaging.pyi
+    │           │   ├── _imagingtk.cpython-312-x86_64-linux-gnu.so
+    │           │   ├── _imagingtk.pyi
+    │           │   ├── ImImagePlugin.py
+    │           │   ├── ImtImagePlugin.py
+    │           │   ├── __init__.py
+    │           │   ├── IptcImagePlugin.py
+    │           │   ├── Jpeg2KImagePlugin.py
+    │           │   ├── JpegImagePlugin.py
+    │           │   ├── JpegPresets.py
+    │           │   ├── __main__.py
+    │           │   ├── McIdasImagePlugin.py
+    │           │   ├── MicImagePlugin.py
+    │           │   ├── MpegImagePlugin.py
+    │           │   ├── MpoImagePlugin.py
+    │           │   ├── MspImagePlugin.py
+    │           │   ├── PaletteFile.py
+    │           │   ├── PalmImagePlugin.py
+    │           │   ├── PcdImagePlugin.py
+    │           │   ├── PcfFontFile.py
+    │           │   ├── PcxImagePlugin.py
+    │           │   ├── PdfImagePlugin.py
+    │           │   ├── PdfParser.py
+    │           │   ├── PixarImagePlugin.py
+    │           │   ├── PngImagePlugin.py
+    │           │   ├── PpmImagePlugin.py
+    │           │   ├── PsdImagePlugin.py
+    │           │   ├── PSDraw.py
+    │           │   ├── __pycache__
+    │           │   │   ├── AvifImagePlugin.cpython-312.pyc
+    │           │   │   ├── BdfFontFile.cpython-312.pyc
+    │           │   │   ├── _binary.cpython-312.pyc
+    │           │   │   ├── BlpImagePlugin.cpython-312.pyc
+    │           │   │   ├── BmpImagePlugin.cpython-312.pyc
+    │           │   │   ├── BufrStubImagePlugin.cpython-312.pyc
+    │           │   │   ├── ContainerIO.cpython-312.pyc
+    │           │   │   ├── CurImagePlugin.cpython-312.pyc
+    │           │   │   ├── DcxImagePlugin.cpython-312.pyc
+    │           │   │   ├── DdsImagePlugin.cpython-312.pyc
+    │           │   │   ├── _deprecate.cpython-312.pyc
+    │           │   │   ├── EpsImagePlugin.cpython-312.pyc
+    │           │   │   ├── ExifTags.cpython-312.pyc
+    │           │   │   ├── features.cpython-312.pyc
+    │           │   │   ├── FitsImagePlugin.cpython-312.pyc
+    │           │   │   ├── FliImagePlugin.cpython-312.pyc
+    │           │   │   ├── FontFile.cpython-312.pyc
+    │           │   │   ├── FpxImagePlugin.cpython-312.pyc
+    │           │   │   ├── FtexImagePlugin.cpython-312.pyc
+    │           │   │   ├── GbrImagePlugin.cpython-312.pyc
+    │           │   │   ├── GdImageFile.cpython-312.pyc
+    │           │   │   ├── GifImagePlugin.cpython-312.pyc
+    │           │   │   ├── GimpGradientFile.cpython-312.pyc
+    │           │   │   ├── GimpPaletteFile.cpython-312.pyc
+    │           │   │   ├── GribStubImagePlugin.cpython-312.pyc
+    │           │   │   ├── Hdf5StubImagePlugin.cpython-312.pyc
+    │           │   │   ├── IcnsImagePlugin.cpython-312.pyc
+    │           │   │   ├── IcoImagePlugin.cpython-312.pyc
+    │           │   │   ├── ImageChops.cpython-312.pyc
+    │           │   │   ├── ImageCms.cpython-312.pyc
+    │           │   │   ├── ImageColor.cpython-312.pyc
+    │           │   │   ├── Image.cpython-312.pyc
+    │           │   │   ├── ImageDraw2.cpython-312.pyc
+    │           │   │   ├── ImageDraw.cpython-312.pyc
+    │           │   │   ├── ImageEnhance.cpython-312.pyc
+    │           │   │   ├── ImageFile.cpython-312.pyc
+    │           │   │   ├── ImageFilter.cpython-312.pyc
+    │           │   │   ├── ImageFont.cpython-312.pyc
+    │           │   │   ├── ImageGrab.cpython-312.pyc
+    │           │   │   ├── ImageMath.cpython-312.pyc
+    │           │   │   ├── ImageMode.cpython-312.pyc
+    │           │   │   ├── ImageMorph.cpython-312.pyc
+    │           │   │   ├── ImageOps.cpython-312.pyc
+    │           │   │   ├── ImagePalette.cpython-312.pyc
+    │           │   │   ├── ImagePath.cpython-312.pyc
+    │           │   │   ├── ImageQt.cpython-312.pyc
+    │           │   │   ├── ImageSequence.cpython-312.pyc
+    │           │   │   ├── ImageShow.cpython-312.pyc
+    │           │   │   ├── ImageStat.cpython-312.pyc
+    │           │   │   ├── ImageText.cpython-312.pyc
+    │           │   │   ├── ImageTk.cpython-312.pyc
+    │           │   │   ├── ImageTransform.cpython-312.pyc
+    │           │   │   ├── ImageWin.cpython-312.pyc
+    │           │   │   ├── ImImagePlugin.cpython-312.pyc
+    │           │   │   ├── ImtImagePlugin.cpython-312.pyc
+    │           │   │   ├── __init__.cpython-312.pyc
+    │           │   │   ├── IptcImagePlugin.cpython-312.pyc
+    │           │   │   ├── Jpeg2KImagePlugin.cpython-312.pyc
+    │           │   │   ├── JpegImagePlugin.cpython-312.pyc
+    │           │   │   ├── JpegPresets.cpython-312.pyc
+    │           │   │   ├── __main__.cpython-312.pyc
+    │           │   │   ├── McIdasImagePlugin.cpython-312.pyc
+    │           │   │   ├── MicImagePlugin.cpython-312.pyc
+    │           │   │   ├── MpegImagePlugin.cpython-312.pyc
+    │           │   │   ├── MpoImagePlugin.cpython-312.pyc
+    │           │   │   ├── MspImagePlugin.cpython-312.pyc
+    │           │   │   ├── PaletteFile.cpython-312.pyc
+    │           │   │   ├── PalmImagePlugin.cpython-312.pyc
+    │           │   │   ├── PcdImagePlugin.cpython-312.pyc
+    │           │   │   ├── PcfFontFile.cpython-312.pyc
+    │           │   │   ├── PcxImagePlugin.cpython-312.pyc
+    │           │   │   ├── PdfImagePlugin.cpython-312.pyc
+    │           │   │   ├── PdfParser.cpython-312.pyc
+    │           │   │   ├── PixarImagePlugin.cpython-312.pyc
+    │           │   │   ├── PngImagePlugin.cpython-312.pyc
+    │           │   │   ├── PpmImagePlugin.cpython-312.pyc
+    │           │   │   ├── PsdImagePlugin.cpython-312.pyc
+    │           │   │   ├── PSDraw.cpython-312.pyc
+    │           │   │   ├── QoiImagePlugin.cpython-312.pyc
+    │           │   │   ├── report.cpython-312.pyc
+    │           │   │   ├── SgiImagePlugin.cpython-312.pyc
+    │           │   │   ├── SpiderImagePlugin.cpython-312.pyc
+    │           │   │   ├── SunImagePlugin.cpython-312.pyc
+    │           │   │   ├── TarIO.cpython-312.pyc
+    │           │   │   ├── TgaImagePlugin.cpython-312.pyc
+    │           │   │   ├── TiffImagePlugin.cpython-312.pyc
+    │           │   │   ├── TiffTags.cpython-312.pyc
+    │           │   │   ├── _tkinter_finder.cpython-312.pyc
+    │           │   │   ├── _typing.cpython-312.pyc
+    │           │   │   ├── _util.cpython-312.pyc
+    │           │   │   ├── _version.cpython-312.pyc
+    │           │   │   ├── WalImageFile.cpython-312.pyc
+    │           │   │   ├── WebPImagePlugin.cpython-312.pyc
+    │           │   │   ├── WmfImagePlugin.cpython-312.pyc
+    │           │   │   ├── XbmImagePlugin.cpython-312.pyc
+    │           │   │   ├── XpmImagePlugin.cpython-312.pyc
+    │           │   │   └── XVThumbImagePlugin.cpython-312.pyc
+    │           │   ├── py.typed
+    │           │   ├── QoiImagePlugin.py
+    │           │   ├── report.py
+    │           │   ├── SgiImagePlugin.py
+    │           │   ├── SpiderImagePlugin.py
+    │           │   ├── SunImagePlugin.py
+    │           │   ├── TarIO.py
+    │           │   ├── TgaImagePlugin.py
+    │           │   ├── TiffImagePlugin.py
+    │           │   ├── TiffTags.py
+    │           │   ├── _tkinter_finder.py
+    │           │   ├── _typing.py
+    │           │   ├── _util.py
+    │           │   ├── _version.py
+    │           │   ├── WalImageFile.py
+    │           │   ├── _webp.cpython-312-x86_64-linux-gnu.so
+    │           │   ├── WebPImagePlugin.py
+    │           │   ├── _webp.pyi
+    │           │   ├── WmfImagePlugin.py
+    │           │   ├── XbmImagePlugin.py
+    │           │   ├── XpmImagePlugin.py
+    │           │   └── XVThumbImagePlugin.py
+    │           ├── pillow-12.1.1.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── licenses
+    │           │   │   └── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── sboms
+    │           │   │   └── auditwheel.cdx.json
+    │           │   ├── top_level.txt
+    │           │   ├── WHEEL
+    │           │   └── zip-safe
+    │           ├── pillow.libs
+    │           │   ├── libavif-01e67780.so.16.3.0
+    │           │   ├── libbrotlicommon-c55a5f7a.so.1.2.0
+    │           │   ├── libbrotlidec-b57ddf63.so.1.2.0
+    │           │   ├── libfreetype-ee1c40c4.so.6.20.4
+    │           │   ├── libharfbuzz-0692f733.so.0.61230.0
+    │           │   ├── libjpeg-32d42e18.so.62.4.0
+    │           │   ├── liblcms2-cc10e42f.so.2.0.17
+    │           │   ├── liblzma-61b1002e.so.5.8.2
+    │           │   ├── libopenjp2-94e588ba.so.2.5.4
+    │           │   ├── libpng16-4a38ea05.so.16.53.0
+    │           │   ├── libsharpyuv-95d8a097.so.0.1.2
+    │           │   ├── libtiff-295fd75c.so.6.2.0
+    │           │   ├── libwebp-d8b9687f.so.7.2.0
+    │           │   ├── libwebpdemux-747f2b49.so.2.0.17
+    │           │   ├── libwebpmux-7f11e5ce.so.3.1.2
+    │           │   ├── libXau-154567c4.so.6.0.0
+    │           │   ├── libxcb-64009ff3.so.1.1.0
+    │           │   └── libzstd-761a17b6.so.1.5.7
     │           ├── pip
     │           │   ├── __init__.py
     │           │   ├── _internal
@@ -3495,6 +3886,386 @@ project_transfer
     │           │   ├── RECORD
     │           │   ├── top_level.txt
     │           │   └── WHEEL
+    │           ├── reportlab
+    │           │   ├── fonts
+    │           │   │   ├── 00readme.txt
+    │           │   │   ├── _abi____.pfb
+    │           │   │   ├── _ab_____.pfb
+    │           │   │   ├── _ai_____.pfb
+    │           │   │   ├── _a______.pfb
+    │           │   │   ├── bitstream-vera-license.txt
+    │           │   │   ├── callig15.afm
+    │           │   │   ├── callig15.pfb
+    │           │   │   ├── cobo____.pfb
+    │           │   │   ├── cob_____.pfb
+    │           │   │   ├── com_____.pfb
+    │           │   │   ├── coo_____.pfb
+    │           │   │   ├── DarkGarden-changelog.txt
+    │           │   │   ├── DarkGarden-copying-gpl.txt
+    │           │   │   ├── DarkGarden-copying.txt
+    │           │   │   ├── DarkGardenMK.afm
+    │           │   │   ├── DarkGardenMK.pfb
+    │           │   │   ├── DarkGarden-readme.txt
+    │           │   │   ├── DarkGarden.sfd
+    │           │   │   ├── _ebi____.pfb
+    │           │   │   ├── _eb_____.pfb
+    │           │   │   ├── _ei_____.pfb
+    │           │   │   ├── _er_____.pfb
+    │           │   │   ├── hb-test.ttf
+    │           │   │   ├── sy______.pfb
+    │           │   │   ├── VeraBd.ttf
+    │           │   │   ├── VeraBI.ttf
+    │           │   │   ├── VeraIt.ttf
+    │           │   │   ├── Vera.ttf
+    │           │   │   ├── zd______.pfb
+    │           │   │   ├── zx______.pfb
+    │           │   │   └── zy______.pfb
+    │           │   ├── graphics
+    │           │   │   ├── barcode
+    │           │   │   │   ├── code128.py
+    │           │   │   │   ├── code39.py
+    │           │   │   │   ├── code93.py
+    │           │   │   │   ├── common.py
+    │           │   │   │   ├── dmtx.py
+    │           │   │   │   ├── eanbc.py
+    │           │   │   │   ├── ecc200datamatrix.py
+    │           │   │   │   ├── fourstate.py
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── lto.py
+    │           │   │   │   ├── __pycache__
+    │           │   │   │   │   ├── code128.cpython-312.pyc
+    │           │   │   │   │   ├── code39.cpython-312.pyc
+    │           │   │   │   │   ├── code93.cpython-312.pyc
+    │           │   │   │   │   ├── common.cpython-312.pyc
+    │           │   │   │   │   ├── dmtx.cpython-312.pyc
+    │           │   │   │   │   ├── eanbc.cpython-312.pyc
+    │           │   │   │   │   ├── ecc200datamatrix.cpython-312.pyc
+    │           │   │   │   │   ├── fourstate.cpython-312.pyc
+    │           │   │   │   │   ├── __init__.cpython-312.pyc
+    │           │   │   │   │   ├── lto.cpython-312.pyc
+    │           │   │   │   │   ├── qr.cpython-312.pyc
+    │           │   │   │   │   ├── qrencoder.cpython-312.pyc
+    │           │   │   │   │   ├── test.cpython-312.pyc
+    │           │   │   │   │   ├── usps4s.cpython-312.pyc
+    │           │   │   │   │   ├── usps.cpython-312.pyc
+    │           │   │   │   │   └── widgets.cpython-312.pyc
+    │           │   │   │   ├── qrencoder.py
+    │           │   │   │   ├── qr.py
+    │           │   │   │   ├── test.py
+    │           │   │   │   ├── usps4s.py
+    │           │   │   │   ├── usps.py
+    │           │   │   │   └── widgets.py
+    │           │   │   ├── charts
+    │           │   │   │   ├── areas.py
+    │           │   │   │   ├── axes.py
+    │           │   │   │   ├── barcharts.py
+    │           │   │   │   ├── dotbox.py
+    │           │   │   │   ├── doughnut.py
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── legends.py
+    │           │   │   │   ├── linecharts.py
+    │           │   │   │   ├── lineplots.py
+    │           │   │   │   ├── markers.py
+    │           │   │   │   ├── piecharts.py
+    │           │   │   │   ├── __pycache__
+    │           │   │   │   │   ├── areas.cpython-312.pyc
+    │           │   │   │   │   ├── axes.cpython-312.pyc
+    │           │   │   │   │   ├── barcharts.cpython-312.pyc
+    │           │   │   │   │   ├── dotbox.cpython-312.pyc
+    │           │   │   │   │   ├── doughnut.cpython-312.pyc
+    │           │   │   │   │   ├── __init__.cpython-312.pyc
+    │           │   │   │   │   ├── legends.cpython-312.pyc
+    │           │   │   │   │   ├── linecharts.cpython-312.pyc
+    │           │   │   │   │   ├── lineplots.cpython-312.pyc
+    │           │   │   │   │   ├── markers.cpython-312.pyc
+    │           │   │   │   │   ├── piecharts.cpython-312.pyc
+    │           │   │   │   │   ├── slidebox.cpython-312.pyc
+    │           │   │   │   │   ├── spider.cpython-312.pyc
+    │           │   │   │   │   ├── textlabels.cpython-312.pyc
+    │           │   │   │   │   ├── utils3d.cpython-312.pyc
+    │           │   │   │   │   └── utils.cpython-312.pyc
+    │           │   │   │   ├── slidebox.py
+    │           │   │   │   ├── spider.py
+    │           │   │   │   ├── textlabels.py
+    │           │   │   │   ├── utils3d.py
+    │           │   │   │   └── utils.py
+    │           │   │   ├── __init__.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── __init__.cpython-312.pyc
+    │           │   │   │   ├── renderbase.cpython-312.pyc
+    │           │   │   │   ├── renderPDF.cpython-312.pyc
+    │           │   │   │   ├── renderPM.cpython-312.pyc
+    │           │   │   │   ├── renderPS.cpython-312.pyc
+    │           │   │   │   ├── renderSVG.cpython-312.pyc
+    │           │   │   │   ├── shapes.cpython-312.pyc
+    │           │   │   │   ├── svgpath.cpython-312.pyc
+    │           │   │   │   ├── testdrawings.cpython-312.pyc
+    │           │   │   │   ├── testshapes.cpython-312.pyc
+    │           │   │   │   ├── transform.cpython-312.pyc
+    │           │   │   │   ├── utils.cpython-312.pyc
+    │           │   │   │   └── widgetbase.cpython-312.pyc
+    │           │   │   ├── renderbase.py
+    │           │   │   ├── renderPDF.py
+    │           │   │   ├── renderPM.py
+    │           │   │   ├── renderPS.py
+    │           │   │   ├── renderSVG.py
+    │           │   │   ├── samples
+    │           │   │   │   ├── bubble.py
+    │           │   │   │   ├── clustered_bar.py
+    │           │   │   │   ├── clustered_column.py
+    │           │   │   │   ├── excelcolors.py
+    │           │   │   │   ├── exploded_pie.py
+    │           │   │   │   ├── filled_radar.py
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── line_chart.py
+    │           │   │   │   ├── linechart_with_markers.py
+    │           │   │   │   ├── __pycache__
+    │           │   │   │   │   ├── bubble.cpython-312.pyc
+    │           │   │   │   │   ├── clustered_bar.cpython-312.pyc
+    │           │   │   │   │   ├── clustered_column.cpython-312.pyc
+    │           │   │   │   │   ├── excelcolors.cpython-312.pyc
+    │           │   │   │   │   ├── exploded_pie.cpython-312.pyc
+    │           │   │   │   │   ├── filled_radar.cpython-312.pyc
+    │           │   │   │   │   ├── __init__.cpython-312.pyc
+    │           │   │   │   │   ├── line_chart.cpython-312.pyc
+    │           │   │   │   │   ├── linechart_with_markers.cpython-312.pyc
+    │           │   │   │   │   ├── radar.cpython-312.pyc
+    │           │   │   │   │   ├── runall.cpython-312.pyc
+    │           │   │   │   │   ├── scatter.cpython-312.pyc
+    │           │   │   │   │   ├── scatter_lines.cpython-312.pyc
+    │           │   │   │   │   ├── scatter_lines_markers.cpython-312.pyc
+    │           │   │   │   │   ├── simple_pie.cpython-312.pyc
+    │           │   │   │   │   ├── stacked_bar.cpython-312.pyc
+    │           │   │   │   │   └── stacked_column.cpython-312.pyc
+    │           │   │   │   ├── radar.py
+    │           │   │   │   ├── runall.py
+    │           │   │   │   ├── scatter_lines_markers.py
+    │           │   │   │   ├── scatter_lines.py
+    │           │   │   │   ├── scatter.py
+    │           │   │   │   ├── simple_pie.py
+    │           │   │   │   ├── stacked_bar.py
+    │           │   │   │   └── stacked_column.py
+    │           │   │   ├── shapes.py
+    │           │   │   ├── svgpath.py
+    │           │   │   ├── testdrawings.py
+    │           │   │   ├── testshapes.py
+    │           │   │   ├── transform.py
+    │           │   │   ├── utils.py
+    │           │   │   ├── widgetbase.py
+    │           │   │   └── widgets
+    │           │   │       ├── adjustableArrow.py
+    │           │   │       ├── eventcal.py
+    │           │   │       ├── flags.py
+    │           │   │       ├── grids.py
+    │           │   │       ├── __init__.py
+    │           │   │       ├── markers.py
+    │           │   │       ├── __pycache__
+    │           │   │       │   ├── adjustableArrow.cpython-312.pyc
+    │           │   │       │   ├── eventcal.cpython-312.pyc
+    │           │   │       │   ├── flags.cpython-312.pyc
+    │           │   │       │   ├── grids.cpython-312.pyc
+    │           │   │       │   ├── __init__.cpython-312.pyc
+    │           │   │       │   ├── markers.cpython-312.pyc
+    │           │   │       │   ├── signsandsymbols.cpython-312.pyc
+    │           │   │       │   └── table.cpython-312.pyc
+    │           │   │       ├── signsandsymbols.py
+    │           │   │       └── table.py
+    │           │   ├── __init__.py
+    │           │   ├── lib
+    │           │   │   ├── abag.py
+    │           │   │   ├── arciv.py
+    │           │   │   ├── attrmap.py
+    │           │   │   ├── boxstuff.py
+    │           │   │   ├── codecharts.py
+    │           │   │   ├── colors.py
+    │           │   │   ├── corp.py
+    │           │   │   ├── enums.py
+    │           │   │   ├── extformat.py
+    │           │   │   ├── fontfinder.py
+    │           │   │   ├── fonts.py
+    │           │   │   ├── formatters.py
+    │           │   │   ├── geomutils.py
+    │           │   │   ├── __init__.py
+    │           │   │   ├── logger.py
+    │           │   │   ├── normalDate.py
+    │           │   │   ├── pagesizes.py
+    │           │   │   ├── pdfencrypt.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── abag.cpython-312.pyc
+    │           │   │   │   ├── arciv.cpython-312.pyc
+    │           │   │   │   ├── attrmap.cpython-312.pyc
+    │           │   │   │   ├── boxstuff.cpython-312.pyc
+    │           │   │   │   ├── codecharts.cpython-312.pyc
+    │           │   │   │   ├── colors.cpython-312.pyc
+    │           │   │   │   ├── corp.cpython-312.pyc
+    │           │   │   │   ├── enums.cpython-312.pyc
+    │           │   │   │   ├── extformat.cpython-312.pyc
+    │           │   │   │   ├── fontfinder.cpython-312.pyc
+    │           │   │   │   ├── fonts.cpython-312.pyc
+    │           │   │   │   ├── formatters.cpython-312.pyc
+    │           │   │   │   ├── geomutils.cpython-312.pyc
+    │           │   │   │   ├── __init__.cpython-312.pyc
+    │           │   │   │   ├── logger.cpython-312.pyc
+    │           │   │   │   ├── normalDate.cpython-312.pyc
+    │           │   │   │   ├── pagesizes.cpython-312.pyc
+    │           │   │   │   ├── pdfencrypt.cpython-312.pyc
+    │           │   │   │   ├── PyFontify.cpython-312.pyc
+    │           │   │   │   ├── pygments2xpre.cpython-312.pyc
+    │           │   │   │   ├── randomtext.cpython-312.pyc
+    │           │   │   │   ├── rl_accel.cpython-312.pyc
+    │           │   │   │   ├── rl_safe_eval.cpython-312.pyc
+    │           │   │   │   ├── rltempfile.cpython-312.pyc
+    │           │   │   │   ├── rparsexml.cpython-312.pyc
+    │           │   │   │   ├── sequencer.cpython-312.pyc
+    │           │   │   │   ├── styles.cpython-312.pyc
+    │           │   │   │   ├── testutils.cpython-312.pyc
+    │           │   │   │   ├── textsplit.cpython-312.pyc
+    │           │   │   │   ├── units.cpython-312.pyc
+    │           │   │   │   ├── utils.cpython-312.pyc
+    │           │   │   │   ├── validators.cpython-312.pyc
+    │           │   │   │   └── yaml.cpython-312.pyc
+    │           │   │   ├── PyFontify.py
+    │           │   │   ├── pygments2xpre.py
+    │           │   │   ├── randomtext.py
+    │           │   │   ├── rl_accel.py
+    │           │   │   ├── rl_safe_eval.py
+    │           │   │   ├── rltempfile.py
+    │           │   │   ├── rparsexml.py
+    │           │   │   ├── sequencer.py
+    │           │   │   ├── styles.py
+    │           │   │   ├── testutils.py
+    │           │   │   ├── textsplit.py
+    │           │   │   ├── units.py
+    │           │   │   ├── utils.py
+    │           │   │   ├── validators.py
+    │           │   │   └── yaml.py
+    │           │   ├── pdfbase
+    │           │   │   ├── acroform.py
+    │           │   │   ├── _can_cmap_data.py
+    │           │   │   ├── _cidfontdata.py
+    │           │   │   ├── cidfonts.py
+    │           │   │   ├── _fontdata_enc_macexpert.py
+    │           │   │   ├── _fontdata_enc_macroman.py
+    │           │   │   ├── _fontdata_enc_pdfdoc.py
+    │           │   │   ├── _fontdata_enc_standard.py
+    │           │   │   ├── _fontdata_enc_symbol.py
+    │           │   │   ├── _fontdata_enc_winansi.py
+    │           │   │   ├── _fontdata_enc_zapfdingbats.py
+    │           │   │   ├── _fontdata.py
+    │           │   │   ├── _fontdata_widths_courierboldoblique.py
+    │           │   │   ├── _fontdata_widths_courierbold.py
+    │           │   │   ├── _fontdata_widths_courieroblique.py
+    │           │   │   ├── _fontdata_widths_courier.py
+    │           │   │   ├── _fontdata_widths_helveticaboldoblique.py
+    │           │   │   ├── _fontdata_widths_helveticabold.py
+    │           │   │   ├── _fontdata_widths_helveticaoblique.py
+    │           │   │   ├── _fontdata_widths_helvetica.py
+    │           │   │   ├── _fontdata_widths_symbol.py
+    │           │   │   ├── _fontdata_widths_timesbolditalic.py
+    │           │   │   ├── _fontdata_widths_timesbold.py
+    │           │   │   ├── _fontdata_widths_timesitalic.py
+    │           │   │   ├── _fontdata_widths_timesroman.py
+    │           │   │   ├── _fontdata_widths_zapfdingbats.py
+    │           │   │   ├── _glyphlist.py
+    │           │   │   ├── __init__.py
+    │           │   │   ├── pdfdoc.py
+    │           │   │   ├── pdfform.py
+    │           │   │   ├── pdfmetrics.py
+    │           │   │   ├── pdfpattern.py
+    │           │   │   ├── pdfutils.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── acroform.cpython-312.pyc
+    │           │   │   │   ├── _can_cmap_data.cpython-312.pyc
+    │           │   │   │   ├── _cidfontdata.cpython-312.pyc
+    │           │   │   │   ├── cidfonts.cpython-312.pyc
+    │           │   │   │   ├── _fontdata.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_enc_macexpert.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_enc_macroman.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_enc_pdfdoc.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_enc_standard.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_enc_symbol.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_enc_winansi.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_enc_zapfdingbats.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_courierbold.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_courierboldoblique.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_courier.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_courieroblique.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_helveticabold.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_helveticaboldoblique.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_helvetica.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_helveticaoblique.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_symbol.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_timesbold.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_timesbolditalic.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_timesitalic.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_timesroman.cpython-312.pyc
+    │           │   │   │   ├── _fontdata_widths_zapfdingbats.cpython-312.pyc
+    │           │   │   │   ├── _glyphlist.cpython-312.pyc
+    │           │   │   │   ├── __init__.cpython-312.pyc
+    │           │   │   │   ├── pdfdoc.cpython-312.pyc
+    │           │   │   │   ├── pdfform.cpython-312.pyc
+    │           │   │   │   ├── pdfmetrics.cpython-312.pyc
+    │           │   │   │   ├── pdfpattern.cpython-312.pyc
+    │           │   │   │   ├── pdfutils.cpython-312.pyc
+    │           │   │   │   ├── rl_codecs.cpython-312.pyc
+    │           │   │   │   └── ttfonts.cpython-312.pyc
+    │           │   │   ├── rl_codecs.py
+    │           │   │   └── ttfonts.py
+    │           │   ├── pdfgen
+    │           │   │   ├── canvas.py
+    │           │   │   ├── __init__.py
+    │           │   │   ├── pathobject.py
+    │           │   │   ├── pdfgeom.py
+    │           │   │   ├── pdfimages.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── canvas.cpython-312.pyc
+    │           │   │   │   ├── __init__.cpython-312.pyc
+    │           │   │   │   ├── pathobject.cpython-312.pyc
+    │           │   │   │   ├── pdfgeom.cpython-312.pyc
+    │           │   │   │   ├── pdfimages.cpython-312.pyc
+    │           │   │   │   └── textobject.cpython-312.pyc
+    │           │   │   └── textobject.py
+    │           │   ├── platypus
+    │           │   │   ├── doctemplate.py
+    │           │   │   ├── figures.py
+    │           │   │   ├── flowables.py
+    │           │   │   ├── frames.py
+    │           │   │   ├── __init__.py
+    │           │   │   ├── multicol.py
+    │           │   │   ├── paragraph.py
+    │           │   │   ├── paraparser.py
+    │           │   │   ├── para.py
+    │           │   │   ├── __pycache__
+    │           │   │   │   ├── doctemplate.cpython-312.pyc
+    │           │   │   │   ├── figures.cpython-312.pyc
+    │           │   │   │   ├── flowables.cpython-312.pyc
+    │           │   │   │   ├── frames.cpython-312.pyc
+    │           │   │   │   ├── __init__.cpython-312.pyc
+    │           │   │   │   ├── multicol.cpython-312.pyc
+    │           │   │   │   ├── para.cpython-312.pyc
+    │           │   │   │   ├── paragraph.cpython-312.pyc
+    │           │   │   │   ├── paraparser.cpython-312.pyc
+    │           │   │   │   ├── tableofcontents.cpython-312.pyc
+    │           │   │   │   ├── tables.cpython-312.pyc
+    │           │   │   │   └── xpreformatted.cpython-312.pyc
+    │           │   │   ├── tableofcontents.py
+    │           │   │   ├── tables.py
+    │           │   │   └── xpreformatted.py
+    │           │   ├── __pycache__
+    │           │   │   ├── __init__.cpython-312.pyc
+    │           │   │   ├── rl_config.cpython-312.pyc
+    │           │   │   └── rl_settings.cpython-312.pyc
+    │           │   ├── rl_config.py
+    │           │   └── rl_settings.py
+    │           ├── reportlab-4.4.10.dist-info
+    │           │   ├── INSTALLER
+    │           │   ├── licenses
+    │           │   │   └── LICENSE
+    │           │   ├── METADATA
+    │           │   ├── RECORD
+    │           │   ├── REQUESTED
+    │           │   ├── top_level.txt
+    │           │   └── WHEEL
     │           ├── sniffio
     │           │   ├── _impl.py
     │           │   ├── __init__.py
@@ -4573,4 +5344,4 @@ project_transfer
     ├── lib64 -> lib
     └── pyvenv.cfg
 
-525 directories, 4049 files
+590 directories, 4755 files
