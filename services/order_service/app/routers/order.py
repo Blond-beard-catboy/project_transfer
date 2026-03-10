@@ -11,6 +11,7 @@ from app.clients.route_client import create_route_for_cargo
 from app.clients.notification_client import send_notification
 from app.utils.pdf import generate_contract
 from datetime import datetime
+from app.clients.payment_client import create_payment
 
 router = APIRouter(prefix="/orders", tags=["orders"])
 
@@ -109,6 +110,11 @@ async def update_order_status(
     new_status = status_update.status
     if new_status:
         order.status = new_status
+    
+    if new_status == OrderStatus.cancelled and old_status != OrderStatus.cancelled:
+    # Вызвать клиент для отмены платежа (если он был создан)
+    # Например, отправить PATCH на payment service для отмены
+        pass
 
     # Если статус меняется на confirmed, генерируем PDF
     if new_status == OrderStatus.confirmed and old_status != OrderStatus.confirmed:
@@ -120,7 +126,12 @@ async def update_order_status(
         except Exception as e:
             raise HTTPException(status_code=503, detail=f"Cargo service unavailable: {str(e)}")
 
-        filename = generate_contract(order.id, cargo, customer_name=f"User {order.customer_id}")
+        filename = generate_contract(
+    order.id,
+    cargo,
+    customer_name=f"User {order.customer_id}",
+    driver_name=f"Driver {order.driver_id}" if order.driver_id else "Не назначен"
+)
         order.contract_file = filename
 
     await db.commit()
@@ -160,12 +171,29 @@ async def confirm_order(
     except Exception as e:
         raise HTTPException(status_code=503, detail=f"Cargo service unavailable: {str(e)}")
 
-    filename = generate_contract(order.id, cargo, customer_name=f"User {order.customer_id}")
+    filename = generate_contract(
+    order.id,
+    cargo,
+    customer_name=f"User {order.customer_id}",
+    driver_name=f"Driver {order.driver_id}" if order.driver_id else "Не назначен"
+)
     order.contract_file = filename
     order.status = OrderStatus.confirmed
 
     await db.commit()
     await db.refresh(order)
+
+        # Создаём платёж
+    try:
+        amount = cargo.get("weight", 0) * 10  # фиктивная стоимость
+        await create_payment(
+            order_id=order.id,
+            amount=amount,
+            headers={"X-User-ID": str(current_user["id"]), "X-User-Role": current_user["role"]}
+        )
+    except Exception as e:
+        # Логируем ошибку, но не прерываем подтверждение (можно и прервать)
+        print(f"Payment creation failed: {e}")
 
     # Уведомление о подтверждении (добавлены заголовки)
     await send_notification(

@@ -11,11 +11,6 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str = "localhost"
     POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = "template_db"
-
-    CARGO_SERVICE_URL: str = "http://localhost:8001"
-    ROUTE_SERVICE_URL: str = "http://localhost:8002"
-    NOTIFICATION_SERVICE_URL: str = "http://localhost:8004"
-    PAYMENT_SERVICE_URL: str = "http://localhost:8006"
     
     @property
     def DATABASE_URL(self) -> str:

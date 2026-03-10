@@ -1,0 +1,26 @@
+[
+    {
+        "external_id": "ext_001",
+        "title": "Стройматериалы",
+        "description": "Кирпич, цемент",
+        "weight": 5000,
+        "pickup_location": "Москва",
+        "delivery_location": "Санкт-Петербург",
+        "pickup_date": "2026-03-15T08:00:00",
+        "delivery_date": "2026-03-20T18:00:00",
+        "price": 50000,
+        "source": "cd_parser"
+    },
+    {
+        "external_id": "ext_002",
+        "title": "Продукты питания",
+        "description": "Овощи, фрукты",
+        "weight": 2000,
+        "pickup_location": "Краснодар",
+        "delivery_location": "Москва",
+        "pickup_date": "2026-03-16T09:00:00",
+        "delivery_date": "2026-03-18T20:00:00",
+        "price": 30000,
+        "source": "cd_parser"
+    }
+]
