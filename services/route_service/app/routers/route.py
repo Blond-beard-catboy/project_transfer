@@ -11,7 +11,7 @@ from app.schemas.route import (
 )
 from app.models.route import Route, RoutePoint, RoutePointStatus
 from app.dependencies import get_current_user
-from services.route_service.app.clients.cargo_client import get_cargo
+from app.clients.cargo_client import get_cargo
 from datetime import datetime
 
 router = APIRouter(prefix="/routes", tags=["routes"])

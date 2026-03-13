@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Request
 from app.core.config import get_settings
 from app.core.logging import setup_logging
-from app.core.middleware import CorrelationIDMiddleware
 from app.middleware.auth import AuthMiddleware
+from app.core.middleware import CorrelationIDMiddleware
 from app.utils.proxy import proxy_request
 
 setup_logging()
@@ -34,3 +34,11 @@ async def orders_proxy(request: Request, path: str):
 @app.api_route("/api/notifications/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
 async def notifications_proxy(request: Request, path: str):
     return await proxy_request(request, settings.NOTIFICATION_SERVICE_URL)
+
+@app.api_route("/api/cart/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+async def cart_proxy(request: Request, path: str):
+    return await proxy_request(request, "http://localhost:8008")
+
+@app.api_route("/api/payments/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+async def payments_proxy(request: Request, path: str):
+    return await proxy_request(request, "http://localhost:8006")
