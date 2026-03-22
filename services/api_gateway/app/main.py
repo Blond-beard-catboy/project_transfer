@@ -42,3 +42,7 @@ async def cart_proxy(request: Request, path: str):
 @app.api_route("/api/payments/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
 async def payments_proxy(request: Request, path: str):
     return await proxy_request(request, "http://localhost:8006")
+
+@app.api_route("/api/analytics/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+async def analytics_proxy(request: Request, path: str):
+    return await proxy_request(request, "http://localhost:8009")

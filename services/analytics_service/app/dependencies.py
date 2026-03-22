@@ -1,10 +1,6 @@
 from fastapi import Request, HTTPException
 
 async def get_current_user(request: Request):
-    # Если это внутренний запрос от другого сервиса, даём роль admin
-    if request.headers.get("X-Internal-Request") == "true":
-        return {"id": 0, "role": "admin"}   # admin видит все заказы
-
     user_id = request.headers.get("X-User-ID")
     user_role = request.headers.get("X-User-Role")
     if not user_id or not user_role:
