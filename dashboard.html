@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Аналитика</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas { width: 800px; height: 400px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Количество заказов по месяцам</h1>
+    <canvas id="ordersChart"></canvas>
+    <script>
+        fetch('http://localhost:8009/api/analytics/orders/monthly', {
+            headers: { 'X-User-ID': '1', 'X-User-Role': 'admin' }
+        })
+        .then(res => res.json())
+        .then(data => {
+            const labels = data.map(d => `${d.year}-${d.month}`);
+            const values = data.map(d => d.total_orders);
+            const ctx = document.getElementById('ordersChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Заказы',
+                        data: values,
+                        backgroundColor: 'steelblue'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        })
+        .catch(err => {
+            console.error('Ошибка:', err);
+            document.body.innerHTML += '<p style="color:red;">Ошибка загрузки данных: ' + err + '</p>';
+        });
+    </script>
+</body>
+</html>

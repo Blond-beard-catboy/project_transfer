@@ -6,6 +6,8 @@ from app.core.database import engine, Base
 from app.routers import analytics
 from app.tasks import start_scheduler
 
+from fastapi.middleware.cors import CORSMiddleware
+
 setup_logging()
 settings = get_settings()
 
@@ -13,6 +15,13 @@ settings = get_settings()
 app = FastAPI(title=settings.SERVICE_NAME)
 app.include_router(analytics.router, prefix="/api")
 app.add_middleware(CorrelationIDMiddleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 async def startup():
